@@ -10,3 +10,8 @@ func (s *Service) AddTask(task models.Tasks) error {
 	}
 	return s.Repository.AddTask(task)
 }
+
+func (s *Service) AllTasks() (task []models.Tasks, err error) {
+	tasks, err := s.Repository.AllTasks()
+	return tasks, err
+}
