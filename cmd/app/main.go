@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/bahodurnazarov/to-do/pkg/app"
 	"github.com/bahodurnazarov/to-do/pkg/config"
 	"log"
 )
@@ -10,5 +11,6 @@ func main() {
 	if err != nil {
 		log.Fatalln("Failed init cfg", err.Error())
 	}
-	log.Println("Config :", cfg)
+	a := app.New(cfg)
+	log.Println("DataBase :", a)
 }
