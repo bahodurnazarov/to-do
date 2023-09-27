@@ -1,7 +1,7 @@
 {
   "app": {
     "serverName": "localhost",
-    "portRun": "5000",
+    "portRun": "8089",
     "logFile": "server.log",
     "token": "djkfdskjgdfgdsfghdffghsd23214dcdgz.324sdfq"
   },
