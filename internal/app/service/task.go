@@ -15,3 +15,7 @@ func (s *Service) AllTasks() (task []models.Tasks, err error) {
 	tasks, err := s.Repository.AllTasks()
 	return tasks, err
 }
+
+func (s *Service) RemoveTask(id string) error {
+	return s.Repository.RemoveTask(id)
+}

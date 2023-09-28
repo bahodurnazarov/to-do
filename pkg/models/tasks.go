@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"strings"
 	"time"
 )
 
@@ -10,12 +11,12 @@ type Tasks struct {
 	Title       string    `json:"title"`
 	Description string    `json:"description"`
 	Status      bool      `json:"status" gorm:"default:false"`
-	CreatedAt   time.Time `json:"autoCreateAt"`
+	CreatedAt   time.Time `json:"CreatedAt"`
 }
 
 func (t *Tasks) Valid() error {
-	if t.Title == "" {
-		return errors.New("gfgfgd")
+	if strings.EqualFold(t.Title, "") {
+		return errors.New("title is empty")
 	}
 	return nil
 }

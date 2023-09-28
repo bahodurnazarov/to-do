@@ -27,3 +27,15 @@ func (h *Handler) AllTasks(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, tasks)
 }
+
+func (h *Handler) RemoveTask(c *gin.Context) {
+	var id string
+	id = c.Param("id")
+
+	if err := h.Service.RemoveTask(id); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Removed"})
+}

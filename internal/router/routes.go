@@ -8,12 +8,12 @@ import (
 )
 
 func Init(h *handler.Handler) *gin.Engine {
-
 	r := gin.Default()
 	r.Use(middleware.CORSMiddleware())
 	r.GET("/ping", h.Ping)
 	r.POST("/addTask", h.AddTask)
 	r.GET("/tasks", h.AllTasks)
+	r.DELETE("/removeTask/:id", h.RemoveTask)
 	r.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"code": "works!", "message": "not route!"})
 	})

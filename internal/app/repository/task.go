@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"fmt"
 	"github.com/bahodurnazarov/to-do/pkg/models"
 	"log"
 )
@@ -19,4 +20,13 @@ func (r *Repository) AllTasks() (tasks []models.Tasks, err error) {
 		return tasks, result.Error
 	}
 	return tasks, nil
+}
+
+func (r *Repository) RemoveTask(id string) error {
+	var task models.Tasks
+	if result := r.Conn.First(&task, id); result.Error != nil {
+		fmt.Println(result.Error)
+	}
+	r.Conn.Delete(&task)
+	return nil
 }
