@@ -30,7 +30,9 @@ func postgresDB(cfg *models.Settings) (*gorm.DB, error) {
 		return nil, err
 	}
 	log.Printf("*** POSTGRES *** -> success connect to Database by user %s", database.PG_user)
-	db.AutoMigrate(&models.Tasks{})
+	if err := db.AutoMigrate(&models.Tasks{}, &models.User{}); err != nil {
+		log.Println(err.Error())
+	}
 	DB = db
 
 	return DB, nil

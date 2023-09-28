@@ -11,10 +11,10 @@ type Tasks struct {
 	Title       string    `json:"title"`
 	Description string    `json:"description"`
 	Status      bool      `json:"status" gorm:"default:false"`
-	CreatedAt   time.Time `json:"CreatedAt"`
+	CreatedAt   time.Time `json:"created_at"`
 }
 
-func (t *Tasks) Valid() error {
+func (t *Tasks) ValidTask() error {
 	if strings.EqualFold(t.Title, "") {
 		return errors.New("title is empty")
 	}
