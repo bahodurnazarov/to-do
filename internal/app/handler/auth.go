@@ -1,11 +1,23 @@
 package handler
 
 import (
+	_ "github.com/bahodurnazarov/to-do/cmd/app/docs"
 	"github.com/bahodurnazarov/to-do/pkg/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
+// PingExample godoc
+// @Summary Проверяем существует ли ID оплата в ЦФТ
+// @ID      paymentID
+// @Schemes
+// @Description отправляем id получаем фио клиента
+// @Tags Routes
+// @Param   data body Info true "body data"
+// @Accept json
+// @Success 200 {object} models.SignUpInput  "Success"
+// @Produce json
+// @Router /auth/register [post]
 func (h *Handler) SignUpUser(c *gin.Context) {
 	var payload *models.SignUpInput
 	if err := c.BindJSON(&payload); err != nil {

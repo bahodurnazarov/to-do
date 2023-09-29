@@ -1,0 +1,11 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "To-do List",
+        "title": "To DO",
+        "termsOfService": "http://localhost:8089/swagger/index.html#/",
+        "contact": {},
+        "version": "1.0"
+    },
+    "paths": {}
+}

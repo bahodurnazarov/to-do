@@ -5,7 +5,6 @@ import (
 	"github.com/bahodurnazarov/to-do/internal/app/repository"
 	"github.com/bahodurnazarov/to-do/internal/app/service"
 	"github.com/bahodurnazarov/to-do/internal/router"
-	"github.com/bahodurnazarov/to-do/pkg/config"
 	"github.com/bahodurnazarov/to-do/pkg/db"
 	"github.com/bahodurnazarov/to-do/pkg/models"
 	"github.com/gin-gonic/gin"
@@ -37,5 +36,5 @@ func New(cfg *models.Settings) *App {
 
 func (a *App) Run(cfg *models.Settings) error {
 	//return a.g.Run(net.JoinHostPort(cfg.Server.Host, cfg.Server.Port))
-	return a.g.Run(":" + config.Cnfg.App.PortRun)
+	return a.g.Run(":8089")
 }

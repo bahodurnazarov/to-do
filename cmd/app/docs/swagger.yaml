@@ -1,0 +1,8 @@
+info:
+  contact: {}
+  description: To-do List
+  termsOfService: http://localhost:8089/swagger/index.html#/
+  title: To DO
+  version: "1.0"
+paths: {}
+swagger: "2.0"
