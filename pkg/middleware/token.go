@@ -1,7 +1,8 @@
 package middleware
 
 import (
-	"github.com/bahodurnazarov/to-do/pkg/config"
+	"github.com/bahodurnazarov/to-do/pkg/db"
+	"github.com/bahodurnazarov/to-do/pkg/models"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -10,9 +11,6 @@ import (
 
 func TokenMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		//var cfg *models.Settings
-		cfg := config.Cnfg
-		secretKey := cfg.App.Token
 		authHeader := c.GetHeader("Authorization")
 
 		// Check if the Authorization header is present
@@ -32,16 +30,14 @@ func TokenMiddleware() gin.HandlerFunc {
 			return
 		}
 
-		log.Println("111111111111111111", splitToken)
 		// Retrieve the token
 		token := splitToken[1]
-		log.Println("TOKEN00000000", token)
-		log.Println("secretKey2222222222", secretKey)
-		// Validate the token (you can implement your own validation logic here)
-		if token != secretKey {
+		var usersT models.UsersToken
+		conn := db.DB
+		result := conn.First(&usersT, "token = ?", token).Error
+		if result != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid token"})
 			c.Abort()
-			log.Println("Invalid token")
 			return
 		}
 
