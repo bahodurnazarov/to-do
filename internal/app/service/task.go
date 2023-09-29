@@ -4,15 +4,15 @@ import (
 	"github.com/bahodurnazarov/to-do/pkg/models"
 )
 
-func (s *Service) AddTask(task models.Tasks) error {
+func (s *Service) AddTask(task models.Tasks, authHeader string) error {
 	if err := task.ValidTask(); err != nil {
 		return err
 	}
-	return s.Repository.AddTask(task)
+	return s.Repository.AddTask(task, authHeader)
 }
 
-func (s *Service) AllTasks() (task []models.Tasks, err error) {
-	tasks, err := s.Repository.AllTasks()
+func (s *Service) AllTasks(authHeader string) (task []models.Tasks, err error) {
+	tasks, err := s.Repository.AllTasks(authHeader)
 	return tasks, err
 }
 

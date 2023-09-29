@@ -8,11 +8,12 @@ import (
 
 func (h *Handler) AddTask(c *gin.Context) {
 	var task models.Tasks
+	authHeader := c.GetHeader("Authorization")
 	if err := c.BindJSON(&task); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"status": "fail", "error": err.Error()})
 		return
 	}
-	if err := h.Service.AddTask(task); err != nil {
+	if err := h.Service.AddTask(task, authHeader); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"status": "fail", "error": err.Error()})
 		return
 	}
@@ -20,7 +21,8 @@ func (h *Handler) AddTask(c *gin.Context) {
 }
 
 func (h *Handler) AllTasks(c *gin.Context) {
-	tasks, err := h.Service.AllTasks()
+	authHeader := c.GetHeader("Authorization")
+	tasks, err := h.Service.AllTasks(authHeader)
 	if len(tasks) == 0 {
 		c.JSON(http.StatusOK, gin.H{"status": "fail", "message": "Not found any record"})
 		return

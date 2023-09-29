@@ -2,10 +2,17 @@ package repository
 
 import (
 	"github.com/bahodurnazarov/to-do/pkg/models"
+	"github.com/bahodurnazarov/to-do/pkg/utils"
 	"log"
 )
 
-func (r *Repository) AddTask(task models.Tasks) error {
+func (r *Repository) AddTask(task models.Tasks, authHeader string) error {
+	userId, err := utils.FindUserId(authHeader)
+	if err != nil {
+		log.Println("Can't Find User ID : ", err.Error())
+		return err
+	}
+	task.UserId = userId
 	if result := r.Conn.Create(&task); result.Error != nil {
 		log.Println("AddTask result : ", result.Error)
 		return result.Error
@@ -13,8 +20,13 @@ func (r *Repository) AddTask(task models.Tasks) error {
 	return nil
 }
 
-func (r *Repository) AllTasks() (tasks []models.Tasks, err error) {
-	if result := r.Conn.Find(&tasks); result.Error != nil {
+func (r *Repository) AllTasks(authHeader string) (tasks []models.Tasks, err error) {
+	userId, err := utils.FindUserId(authHeader)
+	if err != nil {
+		log.Println("Can't Find User ID : ", err.Error())
+		return nil, err
+	}
+	if result := r.Conn.Find(&tasks, "user_id = ?", userId); result.Error != nil {
 		log.Println("AllTasks result : ", result.Error)
 		return tasks, result.Error
 	}
