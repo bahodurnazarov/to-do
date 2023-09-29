@@ -10,16 +10,6 @@ import (
 	"net/http"
 )
 
-// PingExample godoc
-// @Summary Ping
-// @Schemes
-// @Description do ping
-// @Tags Routes
-// @Accept json
-// @Produce json
-// @Success 200
-// @Router /ping [get]
-// Init foutes function
 func Init(h *handler.Handler) *gin.Engine {
 	r := gin.Default()
 	r.Use(middleware.CORSMiddleware())
