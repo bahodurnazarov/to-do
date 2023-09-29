@@ -24,3 +24,11 @@ func (s *Service) SignUpUser(payload models.SignUpInput) error {
 
 	return s.Repository.SignUpUser(newUser)
 }
+
+func (s *Service) SignInUser(payload models.SignInInput) (string, error) {
+	token, err := s.Repository.SignInUser(payload)
+	if err != nil {
+		return "", err
+	}
+	return token, nil
+}

@@ -4,6 +4,10 @@ package models
 type Settings struct {
 	App      App      `json:"app"`
 	Postgres Postgres `json:"postgres"`
+	Redis    Redis    `json:"redis"`
+}
+type Redis struct {
+	RedisUri string `json:"url"`
 }
 
 // Params contains params of server meta data

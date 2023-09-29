@@ -15,9 +15,10 @@ func Init(h *handler.Handler) *gin.Engine {
 	auth := r.Group("/auth")
 	{
 		auth.POST("/register", h.SignUpUser)
+		auth.POST("/login", h.SignInUser)
 	}
 
-	api := r.Group("/task")
+	api := r.Group("/task", middleware.TokenMiddleware())
 	{
 		api.POST("/add", h.AddTask)
 		api.GET("/get-all", h.AllTasks)
